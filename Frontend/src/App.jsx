@@ -50,7 +50,7 @@ console.log(data.todayScore);
       <p className='mt-6'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 <div>
 </div>
-<div className="flex mb-12 ">
+<div className="flex  ">
   <ResponsiveContainer width="100%" height="100%" minWidth={300} minHeight={300} aspect={2} >
   <div className='flex flex-col mt-12'>
   <Bar sessions={activity.sessions}/>

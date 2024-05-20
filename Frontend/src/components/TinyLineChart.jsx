@@ -8,7 +8,21 @@ import {
 
 const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"]; // Noms des jours en français
 
+// Composant de Tooltip personnalisé
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    // Récupération de la valeur à afficher dans l'info-bulle
+    const value = payload[0].value;
 
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${value} min`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 export default function TinyLineChart({ sessions }) {
   // Vérifier si les sessions sont définies et non vides
@@ -27,25 +41,24 @@ export default function TinyLineChart({ sessions }) {
   return (
     <div className="z-12 relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto z-12">
       <div className="absolute top-2 left-4 text-white">
-        <h2 className="font-bold opacity-65 m-3 text-xs">Durée moyenne des <br /> sessions</h2>
+        <h2 className="font-bold m-3 text-xs">Durée moyenne des <br /> sessions</h2>
       </div>
       <div className="flex justify-center items-end h-full pt-8">
         <LineChart
           width={200}
           height={200}
-        data={data}
-        
-          className="mx-auto opacity-65" >
-         
+          data={data}
+          className="mx-auto"
+        >
           <XAxis
             dataKey="name"
-             axisLine={false}
+            axisLine={false}
             tickLine={false}
             tick={{ fill: "#FFFFFF" }}
           />
-          <Tooltip />
+          {/* Utilisation de l'info-bulle personnalisée */}
+          <Tooltip content={<CustomTooltip />} wrapperStyle={{ backgroundColor: "#FFFFFF", padding: "8px", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)" }} />
           <Line 
-           
             type="monotone"
             dataKey="sessionLength"
             stroke="#fff"
@@ -53,7 +66,6 @@ export default function TinyLineChart({ sessions }) {
             activeDot={{ r: 3 }}
             dot={false}
             strokeLinecap="round" 
-            
           />
         </LineChart>
       </div>
