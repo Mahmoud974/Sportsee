@@ -4,6 +4,10 @@ import { RadialBarChart, RadialBar } from "recharts";
 export default function App({todayScore}) {
 let total = todayScore * 100
 
+  // Vérification pour s'assurer que total est un nombre valide
+  if (isNaN(total)) {
+    total = 0; // Vous pouvez choisir de définir une valeur par défaut appropriée
+  }
   const data = [
     { name: "18-24", uv: 100, pv: 2400, fill: "#FBFBFB" },
     { name: "25-29", uv: 100, pv: 4567, fill: "#FBFBFB" },
@@ -20,13 +24,16 @@ let total = todayScore * 100
       barSize={15}
       data={data}
       innerRadius={10}
-      startAngle={120} // Pivoter le graphique de 120 degrés (vers le haut)
+      startAngle={160} // Pivoter le graphique de 160 degrés (vers le haut)
     >
       <RadialBar
         minAngle={15}
         cornerRadius={10}
         dataKey="uv"
       />
+    <text x={40} y={30} textAnchor="middle" dominantBaseline="middle" fill="#000" fontSize={16} fontWeight="bold" >
+      Score
+      </text>
       {/* Texte au milieu */}
       <text x={120} y={100} textAnchor="middle" dominantBaseline="middle" fill="#000" fontSize={34} fontWeight="bold" >
         {total}%

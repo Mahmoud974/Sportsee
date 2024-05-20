@@ -41,11 +41,11 @@ console.log(data.todayScore);
 <>
 
 <Navbar/>
-<section className="flex -mb-16">
+<section className="flex  flex-row">
  {/* Barre verticale 4 icons */}
 <NavbarSide/>
  <div className='flex flex-r'>
-    <section className="ml-12  mt-36  ">
+    <section className="ml-8  mt-8  ">
       <h1 className='text-4xl font-bold'>Bonjour <span className="text-red-600">{data.userInfos?.firstName || " "}</span></h1>
       <p className='mt-6'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 <div>
@@ -54,7 +54,7 @@ console.log(data.todayScore);
   <ResponsiveContainer width="100%" height="100%" minWidth={300} minHeight={300} aspect={2} >
   <div className='flex flex-col mt-12'>
   <Bar sessions={activity.sessions}/>
-<div  className="h-[20rem] flex space-x-12 mt-12">
+<div  className="h-[20rem] flex space-x-8 mt-12">
   <TinyLineChart sessions={average}/>
   <Radar sessions={performance} />
   <SimpleRadialBarChart todayScore={data.todayScore}/>

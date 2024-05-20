@@ -13,10 +13,10 @@ const Badges = ({data}) => {
   { id: 4, icon: icon8, calories: `${lipidCount || 0}g`, label: 'Lipides' },
 ];
     return (
-       <ul className='space-y-14 mt-12'>
+       <ul className='space-y-14 mt-12 '>
       {items.map((item) => (
         <li key={item.id} className="bg-gray-50 rounded-xl mx-16">
-          <div className='flex py-6 px-8 w-[270px]'>
+          <div className='flex py-6 px-8 w-[240px]'>
             <img src={item.icon} alt="" className=''/>
             <div className="ml-4">
               <p className="text-xl text-gray-650 font-black">{item.calories}</p>

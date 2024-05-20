@@ -8,6 +8,8 @@ import {
 
 const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"]; // Noms des jours en français
 
+
+
 export default function TinyLineChart({ sessions }) {
   // Vérifier si les sessions sont définies et non vides
   if (!sessions || !sessions.sessions || sessions.sessions.length === 0) {
@@ -23,9 +25,9 @@ export default function TinyLineChart({ sessions }) {
   });
 
   return (
-    <div className="relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto">
+    <div className="z-12 relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto z-12">
       <div className="absolute top-2 left-4 text-white">
-        <h2 className="font-bold opacity-65 m-5">Durée moyenne des <br /> sessions</h2>
+        <h2 className="font-bold opacity-65 m-3 text-xs">Durée moyenne des <br /> sessions</h2>
       </div>
       <div className="flex justify-center items-end h-full pt-8">
         <LineChart
