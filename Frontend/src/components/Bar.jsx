@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  BarChart, ResponsiveContainer,
+  BarChart,
+  ResponsiveContainer,
   Bar,
   XAxis,
   YAxis,
@@ -24,6 +25,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export default function App({ sessions }) {
+  console.log(sessions);
   // Vérifiez que sessions est défini et qu'il s'agit d'un tableau
   if (!sessions || !Array.isArray(sessions)) {
     return <div>Les sessions sont invalides ou non définies.</div>;
@@ -32,7 +34,7 @@ export default function App({ sessions }) {
   // Préparer les données en utilisant les sessions
   const data = sessions.map((session, id) => {
     return {
-      name: (id + 1).toString(),
+      name: (id + 1).toString(), // Commencez l'index par 1
       Calories: session.calories,
       Poids: session.kilogram,
     };
@@ -43,17 +45,46 @@ export default function App({ sessions }) {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           className="bg-[#FBFBFB] flex px-8 justify-between items-center rounded-lg mx-auto"
-          width="100%" height="100%" barCategoryGap={40}
+          width="100%"
+          height="100%"
+          barCategoryGap={40}
           data={data}
         >
-          <text className="absolute left-0 top-0 mt-4 ml-4 px-8" >Activité quotidienne</text>
-          <Legend verticalAlign="top" align="right" height={40} iconType="circle" iconSize={8} />
+          <text className="absolute left-0 top-0 mt-4 ml-4 px-8">
+            Activité quotidienne
+          </text>
+          <Legend
+            verticalAlign="top"
+            align="right"
+            height={40}
+            iconType="circle"
+            iconSize={8}
+          />
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
-          <XAxis tickLine={false} dataKey="" />
-          <XAxis label={{ value: 'Calories brûlées (kCal)', angle: 0, position: 'top', textAnchor: 'middle' }} />
+          <XAxis tickLine={false} dataKey="name" /> {/* Utilisez 'name' pour l'axe x */}
+          <XAxis
+            label={{
+              value: "Calories brûlées (kCal)",
+              angle: 0,
+              position: "top",
+              textAnchor: "middle",
+            }}
+          />
           <YAxis orientation="right" axisLine={false} tickLine={false} />
-          <Bar dataKey="Poids" fill="#282D30" radius={[20, 20, 0, 0]} maxBarSize={10} name="Poids (kg)" />
-          <Bar dataKey="Calories" fill="#E60000" radius={[20, 20, 0, 0]} maxBarSize={10} name="Calories brûlées (kCal)" />
+          <Bar
+            dataKey="Poids"
+            fill="#282D30"
+            radius={[20, 20, 0, 0]}
+            maxBarSize={10}
+            name="Poids (kg)"
+          />
+          <Bar
+            dataKey="Calories"
+            fill="#E60000"
+            radius={[20, 20, 0, 0]}
+            maxBarSize={10}
+            name="Calories brûlées (kCal)"
+          />
           <Tooltip content={<CustomTooltip />} />
         </BarChart>
       </ResponsiveContainer>

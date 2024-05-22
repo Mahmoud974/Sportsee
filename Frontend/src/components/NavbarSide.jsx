@@ -6,7 +6,7 @@ import icon4 from '../assets/icon-4.png';
 
 const NavbarSide = () => {
     return (
-         <div className="  bg-black  h-auto n flex justify-evenly  flex-col ">
+         <div className=" h-auto bg-black flex xl:justify-evenly  justify-around flex-col ">
 <ul className='flex flex-col justify-center mx-auto items-center space-y-6'>
   <li>
       <img src={icon1} alt="" className="w-12" />

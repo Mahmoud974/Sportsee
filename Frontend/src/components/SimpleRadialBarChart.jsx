@@ -24,7 +24,7 @@ let total = todayScore * 100
       barSize={15}
       data={data}
       innerRadius={10}
-      startAngle={160} // Pivoter le graphique de 160 degrés (vers le haut)
+      startAngle={90} // Pivoter le graphique de 90 degrés (vers le haut)
     >
       <RadialBar
         minAngle={15}

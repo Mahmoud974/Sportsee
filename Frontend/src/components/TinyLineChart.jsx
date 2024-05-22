@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  Tooltip,
-} from "recharts";
+import { LineChart, Line, XAxis, Tooltip } from "recharts";
 
 const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"]; // Noms des jours en français
 
@@ -24,6 +19,21 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+// Fonction de rendu personnalisé pour les ticks de l'axe X
+const renderCustomTick = ({ x, y, payload }) => {
+  return (
+    <text
+      x={x}
+      y={y + 10}
+      fill="#FFFFFF"
+      textAnchor="middle"
+      opacity={0.6} // Applique une opacité aux jours de la semaine
+    >
+      {payload.value}
+    </text>
+  );
+};
+
 export default function TinyLineChart({ sessions }) {
   // Vérifier si les sessions sont définies et non vides
   if (!sessions || !sessions.sessions || sessions.sessions.length === 0) {
@@ -39,33 +49,44 @@ export default function TinyLineChart({ sessions }) {
   });
 
   return (
-    <div className="z-12 relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto z-12">
+    <div className="relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto">
       <div className="absolute top-2 left-4 text-white">
-        <h2 className="font-bold m-3 text-xs">Durée moyenne des <br /> sessions</h2>
+        <h2 className="font-bold m-3 text-xs">
+          Durée moyenne des <br /> sessions
+        </h2>
       </div>
       <div className="flex justify-center items-end h-full pt-8">
         <LineChart
           width={200}
           height={200}
           data={data}
-          className="mx-auto"
+         
         >
           <XAxis
             dataKey="name"
+            className="mx-auto pt-12 "
             axisLine={false}
             tickLine={false}
-            tick={{ fill: "#FFFFFF" }}
+            tick={renderCustomTick} // Utilisation du rendu personnalisé des ticks
           />
-          {/* Utilisation de l'info-bulle personnalisée */}
-          <Tooltip content={<CustomTooltip />} wrapperStyle={{ backgroundColor: "#FFFFFF", padding: "8px", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)" }} />
-          <Line 
-            type="monotone"
+          <Tooltip
+            content={<CustomTooltip />}
+            wrapperStyle={{
+              backgroundColor: "#FFFFFF",
+              padding: "8px",
+              borderRadius: "4px",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+            }}
+          />
+          
+          <Line
+            type="natural"
             dataKey="sessionLength"
             stroke="#fff"
             strokeWidth={3} // Rend la courbe plus épaisse
             activeDot={{ r: 3 }}
             dot={false}
-            strokeLinecap="round" 
+            strokeLinecap="round" // Rend les extrémités de la ligne arrondies
           />
         </LineChart>
       </div>

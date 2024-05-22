@@ -8,7 +8,7 @@ const ErrorPage = () => {
 
 <Navbar/>
  <>
-    <Navbar/>
+
       <section className="flex h-screen ">
 <NavbarSide/>
 <div className="pt-46 flex flex-col justify-center mx-auto text-center">
