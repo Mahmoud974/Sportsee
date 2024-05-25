@@ -25,7 +25,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export default function App({ sessions }) {
-  console.log(sessions);
+
   // Vérifiez que sessions est défini et qu'il s'agit d'un tableau
   if (!sessions || !Array.isArray(sessions)) {
     return <div>Les sessions sont invalides ou non définies.</div>;

@@ -1,3 +1,5 @@
+
+
 import Radar from './components/Radar';
 import TinyLineChart from './components/TinyLineChart';
 import SimpleRadialBarChart from './components/SimpleRadialBarChart';
@@ -10,47 +12,59 @@ import NavbarSide from './components/NavbarSide';
 import Badges from './components/Badges';
 import { useParams } from 'react-router-dom';
 
+/**
+ * Application principale qui affiche les données utilisateur et des graphiques.
+ * @returns {JSX.Element} Le composant App.
+ */
 const App = () => {
-  const { userId } = useParams();
-  
+  const { id } = useParams();
   const [data, setData] = useState([]);
   const [activity, setActivity] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [average, setAverage] = useState([]);
-  
-  // Fonction générique pour récupérer les données
-  const fetchData = async (serviceFunction, setStateFunction, userId) => {
+
+  /**
+   * Fonction générique pour récupérer les données et mettre à jour l'état.
+   * @param {Function} serviceFunction - La fonction du service pour récupérer les données.
+   * @param {Function} setStateFunction - La fonction pour mettre à jour l'état.
+   * @param {string} id - L'identifiant de l'utilisateur.
+   */
+  const fetchData = async (serviceFunction, setStateFunction, id) => {
     try {
-      const response = await serviceFunction(userId);
+      const response = await serviceFunction(id);
       setStateFunction(response);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Utilisation de la fonction générique dans useEffect
+  /**
+   * Utilise useEffect pour récupérer les données utilisateur lors du montage du composant ou lorsque l'id change.
+   */
   useEffect(() => {
-    if (userId) {
-      fetchData(accountService.displayProfil, setData, userId);
-      fetchData(accountService.displayActivity, setActivity, userId);
-      fetchData(accountService.displayPerformance, setPerformance, userId);
-      fetchData(accountService.displayAverageSessions, setAverage, userId);
+    if (id) {
+      fetchData(accountService.displayProfil, setData, id);
+      fetchData(accountService.displayActivity, setActivity, id);
+      fetchData(accountService.displayPerformance, setPerformance, id);
+      fetchData(accountService.displayAverageSessions, setAverage, id);
     }
-  }, [userId]);
+  }, [id]);
 
   return ( 
     <>
       <Navbar />
       <section className="flex flex-row">
-        {/* Barre verticale 4 icons */}
+        {/* Barre verticale avec 4 icônes */}
         <NavbarSide />
-        <div className='flex  flex-r'>
+        <div className='flex flex-r'>
           <section className="ml-8 mt-8">
-            <h1 className='text-4xl font-bold'>Bonjour <span className="text-red-600">{data.userInfos?.firstName || " "}</span></h1>
+            <h1 className='text-4xl font-bold'>
+              Bonjour <span className="text-red-600">{data.userInfos?.firstName || " "}</span>
+            </h1>
             <p className='mt-6'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
             <div>
             </div>
-            <div className="flex-col xl:flex-row  mb-16 xl:mb-0 flex ">
+            <div className="flex-col xl:flex-row mb-16 xl:mb-0 flex">
               <ResponsiveContainer width="100%" height="100%" minWidth={300} minHeight={300} aspect={2}>
                 <div className='flex flex-col mt-12'>
                   <Bar sessions={activity.sessions} />
@@ -61,7 +75,7 @@ const App = () => {
                   </div>
                 </div>
               </ResponsiveContainer>
-              {/* Listes des calories, fat */}
+              {/* Liste des calories, graisses, etc. */}
               <Badges data={data} />
             </div>
           </section>

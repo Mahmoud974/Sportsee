@@ -11,7 +11,7 @@ let total = todayScore * 100
   const data = [
     { name: "18-24", uv: 100, pv: 2400, fill: "#FBFBFB" },
     { name: "25-29", uv: 100, pv: 4567, fill: "#FBFBFB" },
-    { name: "30-34", uv: 100, pv: 1398, fill: "#FBFBFB" },
+    { name: "30-34", uv: 100, pv: 1398, fill: "#FBFBF9" },
     { name: "unknow", uv: total, pv: 4800, fill: "#E60000" }
   ];
 
@@ -31,7 +31,7 @@ let total = todayScore * 100
         cornerRadius={10}
         dataKey="uv"
       />
-    <text x={40} y={30} textAnchor="middle" dominantBaseline="middle" fill="#000" fontSize={16} fontWeight="bold" >
+    <text x={40} y={20} textAnchor="middle" dominantBaseline="middle" fill="#000" fontSize={16} fontWeight="bold" >
       Score
       </text>
       {/* Texte au milieu */}

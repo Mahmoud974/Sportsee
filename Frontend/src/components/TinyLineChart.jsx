@@ -19,6 +19,8 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+
+
 // Fonction de rendu personnalisé pour les ticks de l'axe X
 const renderCustomTick = ({ x, y, payload }) => {
   return (
@@ -77,10 +79,11 @@ export default function TinyLineChart({ sessions }) {
               borderRadius: "4px",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
             }}
+            cursor={false}
           />
           
           <Line
-            type="natural"
+          type="basis"
             dataKey="sessionLength"
             stroke="#fff"
             strokeWidth={3} // Rend la courbe plus épaisse
@@ -88,6 +91,7 @@ export default function TinyLineChart({ sessions }) {
             dot={false}
             strokeLinecap="round" // Rend les extrémités de la ligne arrondies
           />
+          
         </LineChart>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./src/App";
 import ErreurPage from "./src/ErrorPage";
-import List from "./src/List";
 import Users from "./src/Users";
 
 export const router = createBrowserRouter([
@@ -10,15 +9,12 @@ export const router = createBrowserRouter([
     element: <Users />,
   },
   {
-    path: "/:userId",
+    path: "/user/:id",
     element: <App />,
   },
+
   {
-    path: "/list",
-    element: <List />,
-  },
-  {
-    path: "*",
+    path: "*", 
     element: <ErreurPage />,
   },
 ]);
