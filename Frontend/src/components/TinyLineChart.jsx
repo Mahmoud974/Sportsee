@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, Line, XAxis, Tooltip } from "recharts";
+import { LineChart, Rectangle,Line, XAxis, Tooltip } from "recharts";
 
 const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"]; // Noms des jours en français
 
@@ -19,7 +19,23 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-
+const CustomCursor = (props) => {
+  const { points, width, height, stroke } = props;
+  const { x, y } = points[0];
+  
+  
+  return (
+    <Rectangle
+      fill="#d50000"
+      stroke="#d50000"
+      opacity={0.3}
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+    />
+  );
+};
 
 // Fonction de rendu personnalisé pour les ticks de l'axe X
 const renderCustomTick = ({ x, y, payload }) => {
@@ -51,7 +67,7 @@ export default function TinyLineChart({ sessions }) {
   });
 
   return (
-    <div className="relative w-60 h-60 bg-[#FF0000] p-4 rounded-lg mx-auto">
+    <div className="relative w-60 h-60 bg-[#FF0000]  rounded-lg mx-auto">
       <div className="absolute top-2 left-4 text-white">
         <h2 className="font-bold m-3 text-xs">
           Durée moyenne des <br /> sessions
@@ -66,21 +82,13 @@ export default function TinyLineChart({ sessions }) {
         >
           <XAxis
             dataKey="name"
-            className="mx-auto pt-12 "
+           
             axisLine={false}
             tickLine={false}
             tick={renderCustomTick} // Utilisation du rendu personnalisé des ticks
           />
-          <Tooltip
-            content={<CustomTooltip />}
-            wrapperStyle={{
-              backgroundColor: "#FFFFFF",
-              padding: "8px",
-              borderRadius: "4px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-            }}
-            cursor={false}
-          />
+           <Tooltip cursor={<CustomCursor />} />
+          
           
           <Line
           type="basis"
@@ -91,7 +99,16 @@ export default function TinyLineChart({ sessions }) {
             dot={false}
             strokeLinecap="round" // Rend les extrémités de la ligne arrondies
           />
-          
+          <Tooltip
+            content={<CustomTooltip />} // Utilisation du composant de Tooltip personnalisé
+            wrapperStyle={{
+              backgroundColor: "#FFFFFF",
+              padding: "8px",
+              borderRadius: "4px",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+            }}
+            cursor={false}
+          />
         </LineChart>
       </div>
     </div>

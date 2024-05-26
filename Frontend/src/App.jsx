@@ -1,5 +1,3 @@
-
-
 import Radar from './components/Radar';
 import TinyLineChart from './components/TinyLineChart';
 import SimpleRadialBarChart from './components/SimpleRadialBarChart';
@@ -11,6 +9,7 @@ import { useState, useEffect } from 'react';
 import NavbarSide from './components/NavbarSide';
 import Badges from './components/Badges';
 import { useParams } from 'react-router-dom';
+import ErreurPage from './ErrorPage'; // Importez votre composant de page d'erreur
 
 /**
  * Application principale qui affiche les données utilisateur et des graphiques.
@@ -22,6 +21,7 @@ const App = () => {
   const [activity, setActivity] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [average, setAverage] = useState([]);
+  const [error, setError] = useState(null); // État pour stocker les erreurs
 
   /**
    * Fonction générique pour récupérer les données et mettre à jour l'état.
@@ -35,6 +35,7 @@ const App = () => {
       setStateFunction(response);
     } catch (error) {
       console.error(error);
+      setError(error); // Mettre à jour l'état avec l'erreur
     }
   };
 
@@ -49,6 +50,11 @@ const App = () => {
       fetchData(accountService.displayAverageSessions, setAverage, id);
     }
   }, [id]);
+
+  // Afficher la page d'erreur si une erreur s'est produite
+  if (error) {
+    return <ErreurPage />;
+  }
 
   return ( 
     <>

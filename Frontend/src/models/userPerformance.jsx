@@ -1,7 +1,6 @@
 /**
  * UserPerformance model
  */
-
 export default class UserPerformance {
   constructor(data) {
     this.userId = data.userId;
