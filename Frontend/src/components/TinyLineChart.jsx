@@ -22,13 +22,12 @@ const CustomTooltip = ({ active, payload }) => {
 const CustomCursor = (props) => {
   const { points, width, height, stroke } = props;
   const { x, y } = points[0];
-  
-  
+  const { x1, y1 } = points[1];
+  console.log(props);
   return (
     <Rectangle
-      fill="#d50000"
-      stroke="#d50000"
-      opacity={0.3}
+      fill="red"
+      stroke="red"
       x={x}
       y={y}
       width={width}
@@ -42,7 +41,7 @@ const renderCustomTick = ({ x, y, payload }) => {
   return (
     <text
       x={x}
-      y={y + 10}
+      y={y + 25}
       fill="#FFFFFF"
       textAnchor="middle"
       opacity={0.6} // Applique une opacité aux jours de la semaine
@@ -67,17 +66,18 @@ export default function TinyLineChart({ sessions }) {
   });
 
   return (
-    <div className="relative w-60 h-60 bg-[#FF0000]  rounded-lg mx-auto">
+    <div className="relative w-60 h-60 bg-[#FF0000] p-2 rounded-lg mx-auto">
       <div className="absolute top-2 left-4 text-white">
-        <h2 className="font-bold m-3 text-xs">
+        <h2 className="font-bold m-2 text-xs">
           Durée moyenne des <br /> sessions
         </h2>
       </div>
-      <div className="flex justify-center items-end h-full pt-8">
+      <div className="flex justify-center items-end h-full pt-1">
         <LineChart
           width={200}
           height={200}
           data={data}
+          
          
         >
           <XAxis
@@ -87,20 +87,9 @@ export default function TinyLineChart({ sessions }) {
             tickLine={false}
             tick={renderCustomTick} // Utilisation du rendu personnalisé des ticks
           />
-           <Tooltip cursor={<CustomCursor />} />
           
-          
-          <Line
-          type="basis"
-            dataKey="sessionLength"
-            stroke="#fff"
-            strokeWidth={3} // Rend la courbe plus épaisse
-            activeDot={{ r: 3 }}
-            dot={false}
-            strokeLinecap="round" // Rend les extrémités de la ligne arrondies
-          />
           <Tooltip
-            content={<CustomTooltip />} // Utilisation du composant de Tooltip personnalisé
+            content={<CustomTooltip />}
             wrapperStyle={{
               backgroundColor: "#FFFFFF",
               padding: "8px",
@@ -109,6 +98,18 @@ export default function TinyLineChart({ sessions }) {
             }}
             cursor={false}
           />
+          
+          <Line
+          type="natural"
+            dataKey="sessionLength"
+            stroke="#fff"
+            strokeWidth={3} // Rend la courbe plus épaisse
+            activeDot={{ r: 3 }}
+            dot={false}
+            strokeLinecap="round" // Rend les extrémités de la ligne arrondies
+            className="-mt-12"
+          />
+          
         </LineChart>
       </div>
     </div>

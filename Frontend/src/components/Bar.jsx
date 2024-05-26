@@ -70,7 +70,7 @@ export default function App({ sessions }) {
               textAnchor: "middle",
             }}
           />
-          <YAxis orientation="right" axisLine={false} tickLine={false} />
+          <YAxis  orientation="right" axisLine={false} tickLine={false} />
           <Bar
             dataKey="Poids"
             fill="#282D30"
