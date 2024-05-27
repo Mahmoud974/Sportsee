@@ -2,7 +2,7 @@ export const USER_MAIN_DATA = [
     {
         id: 12,
         userInfos: {
-            firstName: 'okko',
+            firstName: 'Karl',
             lastName: 'Dovineau',
             age: 31,
         },

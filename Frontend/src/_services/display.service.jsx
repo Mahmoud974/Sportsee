@@ -35,15 +35,18 @@ const mockFetchData = (endpoint) => {
 const fetchData = async (endpoint) => {
   try {
     const response = await Axios.get(endpoint);
+    
     return response.data.data;
   } catch (error) {
+    
     // Remplacer console.error par un log moins alarmant ou le supprimer
     console.log('API request failed, using mock data.', error); // console.log au lieu de console.error
-    alert('API request failed, using mock data.'); // Affiche une alerte lorsque les données mock sont utilisées
+    
     return new Promise((resolve) => {
       
       const data = mockFetchData(endpoint);
       resolve(data);
+      
     });
   }
 };
